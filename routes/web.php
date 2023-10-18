@@ -1,7 +1,7 @@
 <?php
 
+    use App\Http\Controllers\PostController;
     use App\Models\Category;
-    use App\Models\Post;
     use App\Models\User;
     use Illuminate\Support\Facades\Route;
 
@@ -16,13 +16,9 @@
     |
     */
 
-    Route::get('/', function (){
-        return view('posts', ['posts' => Post::latest()->get(), 'categories' => Category::all()]);
-    })->name('home');
+    Route::get('/', [postController::class, 'index'])->name('home');
 
-    Route::get('/posts/{post}', function ($slug){
-        return view('post', ['post' => Post::where('slug', $slug)->first()]);
-    });
+    Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
     Route::get('/category/{category:slug}', function (Category $category){
         return view('posts', [
