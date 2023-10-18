@@ -1,3 +1,15 @@
+# My First Laravel Project - Laracasts Course
+
+This Markdown file serves as documentation for my first Laravel project, which I created while following the Laracasts course "Laravel 8 From Scratch." In this document, I will provide an overview of the project, its features, and any key takeaways from the course.
+
+## Project Overview
+
+- **Project Name:** Blog
+- **Course URL:** [Laracasts Course](https://laracasts.com/series/laravel-8-from-scratch)
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
