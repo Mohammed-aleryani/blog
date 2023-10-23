@@ -2,7 +2,6 @@
 
     namespace App\Http\Controllers;
 
-    use App\Models\Category;
     use App\Models\Post;
 
     class PostController extends Controller
@@ -11,8 +10,7 @@
         function index()
         {
             return view('posts.index', [
-                'posts'      => Post::latest()->filter(request(['search', 'category', 'author']))->get(),
-                'categories' => Category::all()
+                'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->get(),
             ]);
         }
 
