@@ -18,7 +18,7 @@
     Route::get('/', [postController::class, 'index'])->name('home');
 
     Route::get('/posts/{post:slug}', [PostController::class, 'show']);
-    Route::get('/author/{author:user_name}', function (User $author){
-        return view('posts', ['posts' => $author->posts]);
+    Route::get('/authors/{author:user_name}', function (User $author){
+        return view('posts.index', ['posts' => $author->posts]);
     });
 
