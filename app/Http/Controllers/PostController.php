@@ -10,7 +10,7 @@
         public
         function index()
         {
-            return view('posts', [
+            return view('posts.index', [
                 'posts'      => Post::latest()->filter(request(['search', 'category']))->get(),
                 'categories' => Category::all()
             ]);
@@ -20,6 +20,6 @@
         function show(
             Post $post
         ){
-            return view('post', ['post' => $post]);
+            return view('posts.show', ['post' => $post]);
         }
     }
