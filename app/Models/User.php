@@ -17,12 +17,7 @@
          *
          * @var array<int, string>
          */
-        protected $fillable
-            = [
-                'name',
-                'email',
-                'password',
-            ];
+        protected $guarded = [];
 
         /**
          * The attributes that should be hidden for serialization.
@@ -45,6 +40,13 @@
                 'email_verified_at' => 'datetime',
                 'password'          => 'hashed',
             ];
+
+        protected
+        function setPasswordAttribute(
+            $password
+        ){
+            $this->attributes[ 'password' ] = bcrypt($password);
+        }
 
         public
         function posts()
