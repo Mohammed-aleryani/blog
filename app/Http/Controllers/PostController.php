@@ -10,7 +10,7 @@
         function index()
         {
             return view('posts.index', [
-                'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6),
+                'posts' => Post::orderBy('id', 'desc')->filter(request(['search', 'category', 'author']))->paginate(6),
             ]);
         }
 
