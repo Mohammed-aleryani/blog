@@ -2,7 +2,6 @@
 
     <x-slot name="trigger">
         <button
-                @click="show=!show"
                 class="py-2 pl-3 pr-9 text-sm font-semibold text-left w-full lg:32 flex lg:inline-flex"
                 style="display: inline-flex">
             {{isset($currentCategory)?$currentCategory->name:'Categories'}}

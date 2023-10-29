@@ -26,23 +26,26 @@
         public
         function create()
         {
-            return view('posts.create', ['categories' => Category::all()]);
+            return view('admin.posts.create', ['categories' => Category::all()]);
         }
 
         public
         function store()
         {
+//            ddd(request()->all());
             $attributes = request()->validate([
                 'title'       => 'required',
                 'slug'        => ['required', Rule::unique('posts', 'slug')],
+                'thumbnail'   => 'required',
                 'excerpt'     => 'required',
                 'body'        => 'required',
                 'category_id' => ['required', Rule::exists('categories', 'id')]
             ]);
 
-            $attributes[ 'user_id' ] = auth()->id();
+            $attributes[ 'thumbnail' ] = request()->file('thumbnail')->store('thumbnails');
+            $attributes[ 'user_id' ]   = auth()->id();
             Post::create($attributes);
-            return redirect('/');
+            return redirect('/')->with('success', 'Your post has been added!');
         }
     }
 
