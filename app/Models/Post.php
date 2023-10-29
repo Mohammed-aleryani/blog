@@ -9,7 +9,7 @@
     {
         use HasFactory;
 
-        protected $fillable = ['title', 'category_id', 'slug', 'excerpt', 'body'];
+        protected $guarded = [];
 
         public
         function scopeFilter(

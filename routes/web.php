@@ -1,5 +1,6 @@
 <?php
 
+    use App\Http\Controllers\AdminPostController;
     use App\Http\Controllers\CommentController;
     use App\Http\Controllers\NewsletterController;
     use App\Http\Controllers\PostController;
@@ -34,5 +35,18 @@
     Route::post('/posts/{post:slug}', [CommentController::class, 'store'])->middleware('auth');
 
     Route::post('/newsletter', NewsletterController::class);
+
+
+    Route::middleware('can:admin')->group(function (){
+        Route::get('/admin/posts', [AdminPostController::class, 'index']);
+        Route::get('/admin/posts/create', [AdminPostController::class, 'create']);
+        Route::post('/admin/posts/store', [AdminPostController::class, 'store']);
+        Route::get('/admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
+        Route::patch('/admin/posts/{post}', [AdminPostController::class, 'update']);
+        Route::delete('/admin/posts/{post}', [AdminPostController::class, 'delete']);
+    });
+
+
+
 
 

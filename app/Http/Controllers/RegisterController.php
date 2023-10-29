@@ -24,6 +24,7 @@
 
             ]);
 
+ 
             $user = User::create($attributes);
             auth()->login($user);
 
