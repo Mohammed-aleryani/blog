@@ -19,6 +19,10 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <p
+                                                    class="text-blue-500 hover:text-blue-600">{{$post->save_as}}</p>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a href="/admin/posts/{{ $post->id }}/edit"
                                                class="text-blue-500 hover:text-blue-600">Edit</a>
                                         </td>

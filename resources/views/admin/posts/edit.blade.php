@@ -23,6 +23,13 @@
 
                 <x-form.textarea name="excerpt"> {!!strip_tags(old('excerpt',$post->excerpt)) !!}</x-form.textarea>
                 <x-form.textarea name="body">{!! strip_tags(old('body',$post->body)) !!}</x-form.textarea>
+                <div class="m-6  flex justify-around">
+                    <x-form.radio value="publish" checked="{{old('status',$post->status)=='publish'?'checked':''}}">
+                        Publish
+                    </x-form.radio>
+                    <x-form.radio value="draft" checked="{{old('status',$post->status)=='draft'?'checked':''}}">Draft
+                    </x-form.radio>
+                </div>
 
                 <div class="mb-6 flex flex-col ">
                     <label class="block mb-2 uppercase font-bold text-xs text0gray-700" for="category_id">

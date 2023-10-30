@@ -14,6 +14,11 @@
                 <x-form.input name="thumbnail" type="file"/>
                 <x-form.textarea name="excerpt"/>
                 <x-form.textarea name="body"/>
+                <div class="m-6  flex justify-around">
+                    <x-form.radio value="publish">Publish</x-form.radio>
+                    <x-form.radio value="draft">Draft</x-form.radio>
+                </div>
+
 
                 <div class="mb-6 flex flex-col ">
                     <label class="block mb-2 uppercase font-bold text-xs text0gray-700" for="category_id">
@@ -35,7 +40,7 @@
                 <div class="mb-4 flex justify-end ">
                     <x-form.button type="submit"
                                    class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 ">
-                        PUBLISH
+                        submit
                     </x-form.button>
                 </div>
 

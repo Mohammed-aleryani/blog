@@ -4,6 +4,7 @@
 
     use App\Models\Category;
     use App\Models\Post;
+    use Illuminate\Support\Carbon;
     use Illuminate\Validation\Rule;
 
     class AdminPostController extends Controller
@@ -11,8 +12,13 @@
         public
         function index()
         {
+            $stale_posts = Post::where('status', 'draft')->where('updated_at', '<', Carbon::now()->subWeek(4))->get();
+
+            foreach ($stale_posts as $post) {
+                $post->delete();
+            }
             return view('admin.posts.index', [
-                'posts' => Post::latest()->paginate(50)
+                'posts' => Post::orderBy('id', 'desc')->paginate(50)
             ]);
         }
 
@@ -27,9 +33,10 @@
         {
             $attributes = $this->validatePost();
 
-
-            $attributes[ 'thumbnail' ] = request()->file('thumbnail')->store('thumbnails');
-            $attributes[ 'user_id' ]   = auth()->id();
+            if (isset(request()->all()->thumbnail)) {
+                $attributes[ 'thumbnail' ] = request()->file('thumbnail')->store('thumbnails');
+            }
+            $attributes[ 'user_id' ] = auth()->id();
             Post::create($attributes);
             return redirect('/')->with('success', 'Your post has been added!');
         }
@@ -46,7 +53,7 @@
 
         public
         function update(
-            ?Post $post
+            Post $post
         ){
             $attributes = $this->validatePost($post);
 
@@ -73,17 +80,19 @@
          */
         protected
         function validatePost(
-            Post $post = null
+            ?Post $post = null
         )
         : array{
-            $attributes = request()->validate([
+            $post ??= new Post();
+
+            return request()->validate([
                 'title'       => 'required',
-                'thumbnail'   => $post->exists ? ['image'] : ['image', 'required'],
-                'slug'        => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
+                'thumbnail'   => ['image'],
+                'slug'        => ['required', Rule::unique('posts', 'slug')->ignore($post)],
                 'excerpt'     => 'required',
                 'body'        => 'required',
+                'status'      => 'required',
                 'category_id' => ['required', Rule::exists('categories', 'id')]
             ]);
-            return $attributes;
         }
     }
