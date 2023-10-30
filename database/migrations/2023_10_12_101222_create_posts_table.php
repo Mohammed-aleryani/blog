@@ -19,10 +19,11 @@
                 $table->foreignId("category_id");
                 $table->foreignId("user_id");
                 $table->string('slug')->unique();
-                $table->string('thumbnail')->nullable();
+                $table->string('thumbnail')->default('images/illustration-1.png');
                 $table->string('title');
                 $table->text('excerpt');
                 $table->text('body');
+                $table->string('status')->default('publish');
                 $table->timestamps();
                 $table->timestamp('published_at')->nullable();
             });
