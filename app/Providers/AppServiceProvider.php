@@ -2,6 +2,7 @@
 
     namespace App\Providers;
 
+    use App\Models\Comment;
     use App\Models\User;
     use App\services\Newsletter;
     use Illuminate\Support\Facades\Blade;
@@ -37,6 +38,10 @@
         {
             Gate::define('admin', function (User $user){
                 return $user->username == 'Mohammed';
+            });
+
+            Gate::define('commentOwner', function (User $user, Comment $comment){
+                return $user->id == $comment->author->id;
             });
 
             Blade::if('admin', function (){
