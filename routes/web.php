@@ -33,6 +33,8 @@
     Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth');
 
     Route::post('/posts/{post:slug}', [CommentController::class, 'store'])->middleware('auth');
+    Route::patch('posts/comment/{comment}', [CommentController::class, 'update'])->middleware('auth')->middleware('can:commentOwner,comment');
+    Route::delete('posts/comment/{comment}', [CommentController::class, 'destroy'])->middleware('can:commentOwner,comment');
 
     Route::post('/newsletter', NewsletterController::class);
 

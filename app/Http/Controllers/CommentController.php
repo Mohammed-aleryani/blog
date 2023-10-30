@@ -3,6 +3,7 @@
     namespace App\Http\Controllers;
 
 
+    use App\Models\Comment;
     use App\Models\Post;
 
     class CommentController extends Controller
@@ -24,6 +25,27 @@
             );
 
             return back();
+        }
+
+        public
+        function update(
+            Comment $comment
+        ){
+            $attributes = request()->validate([
+                'body' => 'required'
+            ]);
+
+            $comment->update($attributes);
+            return back()->with('success', 'Comment has been update it');
+        }
+
+
+        public
+        function destroy(
+            Comment $comment
+        ){
+            $comment->delete();
+            return back()->with('success', 'Comment has been deleted');
         }
 
     }
