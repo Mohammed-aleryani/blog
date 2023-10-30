@@ -33,7 +33,7 @@
         {
             $attributes = $this->validatePost();
 
-            if (isset(request()->all()->thumbnail)) {
+            if (isset(request()->thumbnail)) {
                 $attributes[ 'thumbnail' ] = request()->file('thumbnail')->store('thumbnails');
             }
             $attributes[ 'user_id' ] = auth()->id();
